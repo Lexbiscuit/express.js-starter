@@ -1,0 +1,23 @@
+{
+  "name": "@my-app/monorepo",
+  "version": "1.0.0",
+  "description": "Case management app which streamlines case information entry",
+  "author": "lexus",
+  "type": "module",
+  "main": "index.js",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^21.2.3",
+    "@commitlint/config-conventional": "^21.2.3",
+    "@my-app/prettier-config": "*",
+    "lefthook": "^2.2.2",
+    "prettier": "3.9.10"
+  },
+  "prettier": "@my-app/prettier-config"
+}
