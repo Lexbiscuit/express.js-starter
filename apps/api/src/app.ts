@@ -1,12 +1,11 @@
 import express, {type Express, type Request, type Response} from "express";
-import {pinoHttp} from "pino-http";
+import {addMiddlewares} from "./middleware/index.ts";
+import {connectDatabase} from "./config/index.ts";
 
 const app: Express = express();
-const logger = pinoHttp({
-  level: process.env.LOG_LEVEL || "info",
-});
+addMiddlewares(app);
 
-app.use(logger);
+await connectDatabase();
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Hello World! Refresh");

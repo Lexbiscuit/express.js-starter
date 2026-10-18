@@ -1,4 +1,5 @@
 {
   "prettier.prettierPath": "./node_modules/prettier",
-  "prettier.configPath": "./packages/prettier-config/index.js"
+  "prettier.configPath": "./packages/prettier-config/index.js",
+  "editor.tabSize": 2
 }
