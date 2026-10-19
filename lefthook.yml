@@ -2,8 +2,7 @@ pre-commit:
   parallel: false
   commands:
     web-lint:
-      root: "apps/web/"
-      glob: "*.{ts,tsx}"
+      glob: "apps/web/**/*.{ts,tsx}"
       run: bunx oxlint --fix {staged_files}
       stage_fixed: true
     web-format:
@@ -12,8 +11,7 @@ pre-commit:
       run: bunx prettier --write {staged_files}
       stage_fixed: true
     api-lint:
-      root: "apps/api/"
-      glob: "*.{ts,js}"
+      glob: "apps/api/**/*.{ts,js}"
       run: bunx oxlint --fix {staged_files}
       stage_fixed: true
     api-format:

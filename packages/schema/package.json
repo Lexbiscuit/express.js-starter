@@ -1,0 +1,10 @@
+{
+  "name": "@my-app/schema",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "exports": "./src/index.ts",
+  "dependencies": {
+    "zod": "^4.6.7"
+  }
+}

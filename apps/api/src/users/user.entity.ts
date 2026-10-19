@@ -1,21 +1,39 @@
-import {Model, type InferAttributes, type InferCreationAttributes, DataTypes} from "sequelize";
 import {sequelize} from "../config/database.ts";
+import {
+  DataTypes,
+  Model,
+  type InferAttributes,
+  type InferCreationAttributes,
+  type ModelStatic,
+  type CreationOptional,
+} from "sequelize";
 
-class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
-  declare email: string;
-  declare password_hash: string;
+interface UserInstance extends Model<
+  InferAttributes<UserInstance>,
+  InferCreationAttributes<UserInstance>
+> {
+  id: CreationOptional<number>;
+  createdAt: CreationOptional<Date>;
+  updatedAt: CreationOptional<Date>;
+  name: string;
+  email: string;
+  password_hash: string;
 }
 
-User.init(
+const UserEntity = sequelize.define(
+  "User",
   {
+    name: {type: DataTypes.STRING, allowNull: false},
     email: {type: DataTypes.STRING, unique: true, allowNull: false},
     password_hash: {type: DataTypes.STRING, allowNull: false},
   },
   {
-    sequelize: sequelize,
     tableName: "users",
     modelName: "User",
+    defaultScope: {
+      attributes: {exclude: ["password_hash"]},
+    },
   },
-);
+) as ModelStatic<UserInstance>;
 
-export {User};
+export {UserEntity};

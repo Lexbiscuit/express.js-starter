@@ -9,18 +9,23 @@
     "lint:fix": "oxlint --fix"
   },
   "dependencies": {
+    "@my-app/schema": "workspace:*",
+    "@scalar/express-api-reference": "^0.10.30",
+    "@types/swagger-jsdoc": "^6.0.4",
     "connect-timeout": "^1.9.1",
-    "cookie-parser": "~1.4.4",
+    "cookie-parser": "~1.4.7",
     "cors": "^2.8.6",
     "debug": "~2.6.9",
-    "express": "~4.16.1",
+    "express": "5",
     "http-errors": "~1.6.3",
     "multer": "^2.4.0",
     "pg": "^8.23.1",
     "pg-hstore": "^2.3.4",
     "pino": "^10.4.0",
     "pino-http": "^11.0.0",
-    "sequelize": "^6.37.8"
+    "sequelize": "^6.37.8",
+    "swagger-jsdoc": "^6.3.0",
+    "zod": "^4.6.7"
   },
   "devDependencies": {
     "@types/connect-timeout": "^1.9.0",

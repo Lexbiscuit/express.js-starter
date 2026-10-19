@@ -1,1 +1,1 @@
-export {User} from "../users/index.ts";
+export {UserEntity} from "../users/index.ts";

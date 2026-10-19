@@ -4,7 +4,7 @@ ENV NODE_ENV=development
 
 FROM base AS deps
 COPY package.json bun.lock ./
-COPY packages/prettier-config ./packages/prettier-config
+COPY packages/ ./packages/
 COPY apps/api/package.json ./apps/api/package.json
 RUN bun install
 
