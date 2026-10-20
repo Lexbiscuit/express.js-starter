@@ -1,22 +1,34 @@
-import type {Request, Response} from "express";
 import type {UserService} from "./user.service.ts";
+import * as UserDto from "@my-app/schema/user";
+import type {NextFunction, Request} from "express";
 import {z} from "zod";
 
-const GetUserRequestSchema = z.object({
-  userId: z.coerce.number({error: "Invalid id"}).positive({error: "Invalid id"}),
-});
-type GetUserRequest = Request<z.infer<typeof GetUserRequestSchema>>;
-
-interface UserController {
-  getUser: (req: GetUserRequest, res: Response) => Promise<void>;
+export interface UserController {
+  getUser: (
+    req: UserDto.GetUserRequest,
+    res: UserDto.GetUserResponse,
+    next: NextFunction,
+  ) => Promise<void>;
+  addUser: (req: Request, res: UserDto.AddUserResponse) => Promise<void>;
 }
 
-const createUserController = (userService: UserService): UserController => ({
+export const createUserController = (userService: UserService): UserController => ({
   getUser: async (req, res) => {
-    const {userId} = z.parse(GetUserRequestSchema, req.params);
-    res.json(await userService.getUserById(userId));
+    const {userId} = z.parse(UserDto.GetUserRequestSchema, req.params);
+    const data = await userService.getUserById(userId);
+    if (!data) {
+      res.json({success: false, error: {code: "404", message: "User not found"}});
+      return;
+    }
+    const user = UserDto.UserSchema.parse(data);
+    res.json({success: true, data: user});
+    return;
+  },
+  addUser: async (req, res) => {
+    const body = await req.body;
+    const bodyData = UserDto.CreateUserSchema.parse(body);
+    const data = await userService.addUser(bodyData);
+    res.json({success: true, data: data});
     return;
   },
 });
-
-export {type UserController, createUserController};

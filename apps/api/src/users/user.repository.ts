@@ -1,9 +1,10 @@
 import type {Sequelize} from "sequelize";
-import {type User} from "@my-app/schema";
+import {type User, UserSchema, type CreateUserInput} from "@my-app/schema/user";
 import {UserEntity} from "./user.entity.ts";
 
 interface UserRepository {
   findUserById: (userId: number) => Promise<User | null>;
+  createUser: (userData: CreateUserInput) => Promise<User>;
 }
 
 const createUserRepository = (_db: Sequelize): UserRepository => ({
@@ -18,11 +19,16 @@ const createUserRepository = (_db: Sequelize): UserRepository => ({
       return null;
     }
 
-    return {
-      id: user.id,
-      name: user.name,
-      email: user.email,
-    };
+    return UserSchema.parse(user);
+  },
+  createUser: async (userData) => {
+    const user = await UserEntity.create({
+      name: userData.name,
+      email: userData.email,
+      password_hash: userData.password,
+    });
+
+    return UserSchema.parse(user);
   },
 });
 

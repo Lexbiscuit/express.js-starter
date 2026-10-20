@@ -3,8 +3,14 @@
   "version": "1.0.0",
   "type": "module",
   "private": true,
-  "exports": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./user": "./src/user.schema.ts",
+    "./response": "./src/response.schema.ts"
+  },
   "dependencies": {
+    "@types/express": "^5.0.6",
+    "express": "^5.3.0",
     "zod": "^4.6.7"
   }
 }
