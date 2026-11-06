@@ -1,15 +1,13 @@
 {
-  "name": "@my-app/api",
+  "name": "@repo/api",
   "version": "0.0.0",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "tsx watch src/app.ts",
-    "lint": "oxlint",
-    "lint:fix": "oxlint --fix"
+    "dev": "tsx watch --env-file .env src/app.ts"
   },
   "dependencies": {
-    "@my-app/schema": "workspace:*",
+    "@repo/schema": "workspace:*",
     "@scalar/express-api-reference": "^0.10.30",
     "@types/http-errors": "^2.0.5",
     "@types/swagger-jsdoc": "^6.0.4",

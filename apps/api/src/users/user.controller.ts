@@ -1,5 +1,5 @@
 import type {UserService} from "./user.service.ts";
-import * as UserDto from "@my-app/schema/user";
+import * as UserDto from "@repo/schema/user";
 import type {NextFunction, Request} from "express";
 import {z} from "zod";
 

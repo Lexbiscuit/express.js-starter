@@ -3,6 +3,8 @@ import {addMiddlewares, ApiDefinition, globalErrorHandler} from "./middleware/in
 import {connectDatabase} from "./config/index.ts";
 import {userRouter} from "./users/index.ts";
 
+const PORT = process.env.PORT || 3000;
+
 const app: Express = express();
 addMiddlewares(app);
 
@@ -22,4 +24,4 @@ app.use((_req, res) => {
 });
 app.use(globalErrorHandler);
 
-app.listen(3000);
+app.listen(PORT);

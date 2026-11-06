@@ -1,21 +1,10 @@
 pre-commit:
-  parallel: false
+  parallel: true
   commands:
-    web-lint:
-      glob: "apps/web/**/*.{ts,tsx}"
-      run: bunx oxlint --fix {staged_files}
+    format:
+      glob: "*.{js,jsx,ts,tsx,mjs,cjs,json,jsonc,css,md,yaml,yml}"
+      run: bunx oxfmt --no-error-on-unmatched-pattern {staged_files}
       stage_fixed: true
-    web-format:
-      root: "apps/web/"
-      glob: "*.{ts,tsx}"
-      run: bunx prettier --write {staged_files}
-      stage_fixed: true
-    api-lint:
-      glob: "apps/api/**/*.{ts,js}"
-      run: bunx oxlint --fix {staged_files}
-      stage_fixed: true
-    api-format:
-      root: "apps/api/"
-      glob: "*.{ts,js}"
-      run: bunx prettier --write {staged_files}
-      stage_fixed: true
+    lint:
+      glob: "*.{js,jsx,ts,tsx,mjs,cjs}"
+      run: bunx oxlint -c .oxlintrc.json --type-aware {staged_files}

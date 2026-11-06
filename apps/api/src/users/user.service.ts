@@ -1,5 +1,5 @@
 import type {UserRepository} from "./user.repository.ts";
-import {type User, type AddUserInput} from "@my-app/schema/user";
+import {type User, type AddUserInput} from "@repo/schema/user";
 
 interface UserService {
   getUserById: (userId: number) => Promise<User | null>;

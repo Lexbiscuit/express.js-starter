@@ -1,10 +1,10 @@
 import type {Sequelize} from "sequelize";
-import {type User, UserSchema, type CreateUserInput} from "@my-app/schema/user";
+import {type User, UserSchema, type AddUserInput} from "@repo/schema/user";
 import {UserEntity} from "./user.entity.ts";
 
 interface UserRepository {
   findUserById: (userId: number) => Promise<User | null>;
-  createUser: (userData: CreateUserInput) => Promise<User>;
+  createUser: (userData: AddUserInput) => Promise<User>;
 }
 
 const createUserRepository = (_db: Sequelize): UserRepository => ({

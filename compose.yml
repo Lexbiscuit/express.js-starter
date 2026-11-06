@@ -8,6 +8,8 @@ services:
       interval: 10s
       timeout: 5s
       retries: 3
+    ports:
+      - 6379:6379
     expose:
       - 6379
 
@@ -23,6 +25,8 @@ services:
       interval: 5s
       timeout: 3s
       retries: 10
+    ports:
+      - 5432:5432
     expose:
       - 5432
 
@@ -35,8 +39,8 @@ services:
       - "3000:3000"
     environment:
       # Point at the docker-internal hostnames, not localhost
-      DATABASE_URL: postgresql://postgres:${POSTGRES_PASSWORD}@postgres:5432/postgres
-      REDIS_URL: redis://redis:6379
+      DATABASE_URL: ${DATABASE_URL}
+      REDIS_URL: ${REDIS_URL}
       NODE_ENV: development
       PORT: 3000
     volumes:
@@ -54,6 +58,8 @@ services:
           target: /app/apps/api/src
         - action: rebuild
           path: ./apps/api/package.json
+    profiles:
+      - prod
 volumes:
   postgres_data:
   redis_data:
